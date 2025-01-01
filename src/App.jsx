@@ -1,6 +1,6 @@
 import "./App.css";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
-import AboutUs from "./componenets/About";
+// import AboutUs from "./componenets/About";
 import Home from "./componenets/Home";
 import Navbar from "./componenets/Navbar";
 import Users from "./componenets/User";
@@ -15,7 +15,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Navbar />}>
             <Route exact path="/" element={<Home />} />
-            <Route path="/about" element={<AboutUs />} />
+
             <Route path="/users" element={<Users />} />
             <Route path="/users/user/:username" element={<UserProfile />} />
             <Route path="/search" element={<SearchUser />} />
