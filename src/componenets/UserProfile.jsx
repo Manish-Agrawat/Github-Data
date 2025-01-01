@@ -1,6 +1,7 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
+import axios from "axios";
+import "../style/userprofile.css";
 
 const UserProfile = () => {
   const [gitUserData, setGitUserData] = useState({});
@@ -8,24 +9,29 @@ const UserProfile = () => {
 
   useEffect(() => {
     const getGitUser = async () => {
-      const response = await axios.get(
-        `https://api.github.com/users/${username}`
-      );
-      console.log("USER IS HERE", response.data);
-      setGitUserData(response.data);
-      return response.data;
+      try {
+        const response = await axios.get(
+          `https://api.github.com/users/${username}`
+        );
+        console.log("USER DATA:", response.data);
+        setGitUserData(response.data);
+      } catch (error) {
+        console.error("Error fetching GitHub user data:", error);
+      }
     };
-    getGitUser().catch((e) => console.error(e));
-  }, []);
+
+    getGitUser();
+  }, [username]);
+
   return (
+ 
     <div className="user-profile-main-cont">
       <div className="top-cont">
-        {/* <h1>{username}</h1> */}
         <img
           src={gitUserData.avatar_url}
           className="user-avatar-img"
-          alt="user-img"
-        />{" "}
+          alt="User Avatar"
+        />
         <div className="name-cont">
           <span>{gitUserData.login}</span>
           <h2>{gitUserData.name}</h2>
@@ -36,20 +42,21 @@ const UserProfile = () => {
             </span>
             <span>Following: {gitUserData.following}</span>
           </div>
-          <a
+          <Link
             className="view-ongit-a"
-            href={gitUserData.html_url}
-            target="_blank"
-            rel="noreferrer"
+            to={`/github/${username}`}
+            
+            
           >
             View on GitHub
-          </a>
+          </Link>
         </div>
       </div>
       <div className="bottom-cont">
         <h3>{gitUserData.bio}</h3>
       </div>
     </div>
+    
   );
 };
 

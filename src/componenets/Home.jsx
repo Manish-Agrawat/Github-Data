@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import UserCard from "./UserCard";
+import Loader from "./Loader";
 
 const Home = () => {
   //State management
@@ -17,11 +18,11 @@ const Home = () => {
     gitRepos().catch((e) => console.error(e));
   }, []);
   return (
-    <div className="users-cont">
+    <div className="userpage">
       {repos ? (
         repos.map((repo, idx) => <UserCard key={idx} repo={repo} />)
       ) : (
-        <h1>Loading...</h1>
+        <Loader/>
       )}
     </div>
   );

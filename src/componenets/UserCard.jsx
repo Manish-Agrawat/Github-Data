@@ -1,4 +1,6 @@
 import React from "react";
+import "../style/userCard.css"
+
 
 const UserCard = ({ repo }) => {
   return (

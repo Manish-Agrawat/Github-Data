@@ -19,7 +19,7 @@ const Users = () => {
     getGitUsers().catch((e) => console.error(e));
   }, []);
   return (
-    <div style={{ marginTop: "50px" }}>
+    <div className="userpage">
       {" "}
       <div className="users-cont">
         {gitUsers.map((user) => (

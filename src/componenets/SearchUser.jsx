@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "../style/search.css";
 
 const SearchUser = () => {
   const [username, setUsername] = useState(null);
@@ -31,11 +32,15 @@ const SearchUser = () => {
         setAttempts((currentAttempt) => currentAttempt - 1);
         setErrorMsg(`User Does Not Exist! ${attempts - 1} Attempts remaining`);
       });
+    } else {
+      setErrorMsg("Username cannot be empty!");
+      setLoading("Submit");
     }
   };
   useEffect(() => {
     if (attempts <= 0) {
       setErrorMsg("Too many attempts, REDIRECTING...");
+      navigate("/");
     }
   }, [attempts]);
   return (
